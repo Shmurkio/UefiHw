@@ -1,0 +1,103 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="UefiCppProject">
+    <UefiCppProjectSchema>2</UefiCppProjectSchema>
+    <UefiCppProjectType>StaticLibrary</UefiCppProjectType>
+    <UefiCppSolution>..\UefiHw.slnx</UefiCppSolution>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir)Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir)Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Include\UefiHw\Boot\Event.hpp" />
+    <ClInclude Include="Include\UefiHw\Boot\Notification.hpp" />
+    <ClInclude Include="Include\UefiHw\Boot\Page.hpp" />
+    <ClInclude Include="Include\UefiHw\Boot\Pool.hpp" />
+    <ClInclude Include="Include\UefiHw\Boot\Timer.hpp" />
+    <ClInclude Include="Include\UefiHw\Checked.hpp" />
+    <ClInclude Include="Include\UefiHw\Controller\Connections.hpp" />
+    <ClInclude Include="Include\UefiHw\Dma\Buffer.hpp" />
+    <ClInclude Include="Include\UefiHw\Driver\Binding.hpp" />
+    <ClInclude Include="Include\UefiHw\Driver\Controller.hpp" />
+    <ClInclude Include="Include\UefiHw\Driver\Registration.hpp" />
+    <ClInclude Include="Include\UefiHw\Firmware.hpp" />
+    <ClInclude Include="Include\UefiHw\Format.hpp" />
+    <ClInclude Include="Include\UefiHw\Io\Bar.hpp" />
+    <ClInclude Include="Include\UefiHw\Pci\Attributes.hpp" />
+    <ClInclude Include="Include\UefiHw\Pci\Device.hpp" />
+    <ClInclude Include="Include\UefiHw\Pci\Types.hpp" />
+    <ClInclude Include="Include\UefiHw\Pci\View.hpp" />
+    <ClInclude Include="Include\UefiHw\Protocol\Group.hpp" />
+    <ClInclude Include="Include\UefiHw\Protocol\Handles.hpp" />
+    <ClInclude Include="Include\UefiHw\Protocol\Information.hpp" />
+    <ClInclude Include="Include\UefiHw\Protocol\Install.hpp" />
+    <ClInclude Include="Include\UefiHw\Protocol\Installed.hpp" />
+    <ClInclude Include="Include\UefiHw\Protocol\Locate.hpp" />
+    <ClInclude Include="Include\UefiHw\Protocol\Open.hpp" />
+    <ClInclude Include="Include\UefiHw\Protocol\Opened.hpp" />
+    <ClInclude Include="Include\UefiHw\Protocol\Traits.hpp" />
+    <ClInclude Include="Include\UefiHw\Protocol\View.hpp" />
+    <ClInclude Include="Include\UefiHw\Status.hpp" />
+    <ClInclude Include="Source\Boot\EventSupport.hpp" />
+    <ClInclude Include="Source\Pci\State.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Boot\Event.cpp" />
+    <ClCompile Include="Source\Boot\Notification.cpp" />
+    <ClCompile Include="Source\Boot\Page.cpp" />
+    <ClCompile Include="Source\Boot\Pool.cpp" />
+    <ClCompile Include="Source\Boot\Timer.cpp" />
+    <ClCompile Include="Source\Controller\Connections.cpp" />
+    <ClCompile Include="Source\Dma\Buffer.cpp" />
+    <ClCompile Include="Source\Driver\Registration.cpp" />
+    <ClCompile Include="Source\Io\Bar.cpp" />
+    <ClCompile Include="Source\Pci\Access.cpp" />
+    <ClCompile Include="Source\Pci\Device.cpp" />
+    <ClCompile Include="Source\Pci\View.cpp" />
+    <ClCompile Include="Source\Protocol\Handles.cpp" />
+    <ClCompile Include="Source\Protocol\Information.cpp" />
+    <ClCompile Include="Source\Status.cpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{75EF5EDA-601A-4A35-B980-02AC8124C0C6}</ProjectGuid>
+    <RootNamespace>UefiHw</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="UefiCppSdk.props" Condition="Exists('UefiCppSdk.props')" />
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v145</PlatformToolset>
+    <UseDebugLibraries>false</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="UefiCppSdk.resolve.props" Condition="Exists('UefiCppSdk.resolve.props')" />
+  <Import Project="$(_UefiCppSdkRoot)Build\MSBuild\UefiCpp.StaticLibrary.props" Condition="Exists('$(_UefiCppSdkRoot)Build\MSBuild\UefiCpp.StaticLibrary.props')" />
+  <!-- Persist this in the project so the first Visual Studio build uses IntDir. -->
+  <ItemDefinitionGroup Label="UefiCppBuildLog">
+    <BuildLog>
+      <Path>$(IntDir)$(MSBuildProjectName).log</Path>
+    </BuildLog>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <Import Project="$(_UefiCppSdkRoot)Build\MSBuild\UefiCpp.targets" Condition="Exists('$(_UefiCppSdkRoot)Build\MSBuild\UefiCpp.targets')" />
+  <Target Name="UefiCppLocateSdk" BeforeTargets="PrepareForBuild;_CheckForInvalidConfigurationAndPlatform;BeforeClean;BeforeCppClean;ClCompile;Link;Lib">
+    <Error Code="UEFICPP1001" Condition="!Exists('$(MSBuildProjectDirectory)\UefiCppSdk.resolve.props') or '$(UefiCppSdkRoot)'=='' or !Exists('$(_UefiCppSdkRoot)Manifest.json') or !Exists('$(_UefiCppSdkRoot)Build\MSBuild\UefiCpp.targets') or !Exists('$(_UefiCppSdkRoot)Tools\UefiCppSdk.exe')" Text="Required UefiCpp SDK $(UefiCppBoundVersion), source $(UefiCppBoundSource), ABI $(UefiCppBoundRuntimeAbi) could not be resolved. Selected: $(UefiCppSdkRoot). Expected: $(_UefiCppExpectedRoot). Check LOCALAPPDATA and run the matching package's Tools\UefiCppSdk.exe Install --User, or select /p:UefiCppSdkRoot. Migrate older projects with Upgrade." />
+  </Target>
+</Project>

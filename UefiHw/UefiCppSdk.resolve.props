@@ -1,0 +1,21 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- Copied beside each project. Resolve after inherited C++ properties, before SDK imports.
+       Public overrides remain public; computed defaults never become global properties. -->
+  <PropertyGroup>
+    <UefiCppSdkRoot Condition="'$(UefiCppSdkRoot)'=='' and '$(UEFICPP_SDK_ROOT)'!=''">$(UEFICPP_SDK_ROOT)</UefiCppSdkRoot>
+    <_UefiCppLocalConfig />
+    <_UefiCppOwnerPath Condition="'$(UefiCppSolution)'!=''">$([MSBuild]::NormalizePath('$(MSBuildProjectDirectory)', '$(UefiCppSolution)'))</_UefiCppOwnerPath>
+    <_UefiCppLocalFile Condition="'$(_UefiCppOwnerPath)'!=''">$([System.IO.Path]::GetDirectoryName('$(_UefiCppOwnerPath)'))\UefiCppSdk.local.props</_UefiCppLocalFile>
+    <_UefiCppLocalConfig Condition="'$(UefiCppSdkRoot)'=='' and Exists('$(_UefiCppLocalFile)')">$(_UefiCppLocalFile)</_UefiCppLocalConfig>
+  </PropertyGroup>
+  <Import Project="$(_UefiCppLocalConfig)" Condition="'$(_UefiCppLocalConfig)'!=''" />
+  <PropertyGroup>
+    <_UefiCppExpectedRoot>%LOCALAPPDATA%\UefiCpp\SDKs\$(UefiCppBoundVersion)\$(UefiCppBoundSource)\</_UefiCppExpectedRoot>
+    <_UefiCppIdentityValid>$([System.Text.RegularExpressions.Regex]::IsMatch('$(UefiCppBoundVersion)', '^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-[0-9A-Za-z-]+(\.[0-9A-Za-z-]+)*)?(\+[0-9A-Za-z-]+(\.[0-9A-Za-z-]+)*)?$'))</_UefiCppIdentityValid>
+    <_UefiCppIdentityValid Condition="!$([System.Text.RegularExpressions.Regex]::IsMatch('$(UefiCppBoundSource)', '^[a-f0-9]{64}$')) or !$([System.Text.RegularExpressions.Regex]::IsMatch('$(UefiCppBoundRuntimeAbi)', '^[1-9][0-9]*$'))">false</_UefiCppIdentityValid>
+    <_UefiCppUserRootValid>$([System.Text.RegularExpressions.Regex]::IsMatch('$(LOCALAPPDATA)', '^[A-Za-z]:[\\/][^:&lt;&gt;&quot;|?*\r\n]+$'))</_UefiCppUserRootValid>
+    <_UefiCppExpectedRoot Condition="'$(_UefiCppIdentityValid)'=='true' and '$(_UefiCppUserRootValid)'=='true'">$([MSBuild]::NormalizeDirectory('$(LOCALAPPDATA)', 'UefiCpp', 'SDKs', '$(UefiCppBoundVersion)', '$(UefiCppBoundSource)'))</_UefiCppExpectedRoot>
+    <UefiCppSdkRoot Condition="'$(UefiCppSdkRoot)'=='' and '$(_UefiCppLocalConfig)'=='' and '$(_UefiCppIdentityValid)'=='true' and '$(_UefiCppUserRootValid)'=='true'">$(_UefiCppExpectedRoot)</UefiCppSdkRoot>
+    <_UefiCppSdkRoot Condition="'$(UefiCppSdkRoot)'!=''">$([MSBuild]::NormalizeDirectory('$(MSBuildProjectDirectory)', '$(UefiCppSdkRoot)'))</_UefiCppSdkRoot>
+  </PropertyGroup>
+</Project>

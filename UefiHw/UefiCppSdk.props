@@ -1,0 +1,7 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="UefiCppBinding">
+    <UefiCppBoundVersion>1.0.16-Dev.9b8025957dda</UefiCppBoundVersion>
+    <UefiCppBoundSource>9b8025957dda0f579b456546318ff2e608aed2cc0a10848eb9060f64339cbd2b</UefiCppBoundSource>
+    <UefiCppBoundRuntimeAbi>11</UefiCppBoundRuntimeAbi>
+  </PropertyGroup>
+</Project>

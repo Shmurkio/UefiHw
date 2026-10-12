@@ -1,0 +1,9 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+  </Configurations>
+  <Folder Name="/Solution Items/">
+    <File Path="README.md" />
+  </Folder>
+  <Project Path="UefiHw/UefiHw.vcxproj" Id="75ef5eda-601a-4a35-b980-02ac8124c0c6" />
+</Solution>

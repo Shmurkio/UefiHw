@@ -1,0 +1,19 @@
+# UefiCpp SDK build outputs
+Output/
+
+# Local SDK selection
+UefiCppSdk.local.props
+
+# Visual Studio user-specific state
+.vs/
+*.vcxproj.user
+*.suo
+*.VC.db
+*.VC.VC.opendb
+ipch/
+*.ipch
+
+# UefiCpp SDK temporary and transaction files
+.UefiCppProject-*/
+.UefiCppXml-*.tmp
+.UefiCppTransaction/
